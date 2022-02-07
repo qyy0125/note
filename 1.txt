@@ -1,0 +1,76 @@
+块级作用域
+ if(true){    // 把变量写到{}中叫做块级作用域
+            var a = 1;   // var的方式是不具备块级作用域的，外面是可以找到的
+        }
+        console.log(a); //1
+		
+  if(true){
+            let a = 1;  // let是具备块级作用域的
+        }
+        console.log(a);//错误
+		
+		
+es6新语法
+模板字符串
+可以折行 支持运算符、字符串、数组、对象的一些方法
+插值写法可以直接在``中生效 ${}	let a="你好"; let b=`${a}b`
+
+			let a = 1,
+            b = 2,
+            c = 3;
+			
+			let a = 1;
+			let b = 2;
+			//let tmp;
+			[b, a] = [a, b];   // 整个把右边对应到左边的值当中
+			console.log(a);//2
+			
+对象字面量
+ var obj={
+            "name":'qq',
+            "age":12
+        };
+        console.log(obj["name"]);//obj.name
+箭头函数的特性：
+            //1. 不会影响this
+            //2. 没有arguments(实参集合)
+ let foo = function(x){
+            return 123;   //语句块中只有return操作的时候，箭头函数是可以简写的
+        }; 
+        
+        //let foo = x => 123;  //我是个函数，箭头函数的最简写法。
+        //console.log( foo() );
+1. 函数声明的写法
+
+            function foo(){
+
+            }
+
+            2. 函数表达式的写法
+
+            
+            var b = function(){
+                console.log("1")
+            }
+			b();
+			
+arguments 实参数组集合
+function bar(a,b){
+            console.log(arguments);//[1,2]
+        }
+        bar(1,2)
+		
+		foo();
+        // 函数声明是具备提升的，编译后会把函数声明提升到作用域最顶端
+         function foo(){
+            console.log(1);
+        } 
+		
+		
+//区别1. 函数声明是有函数提升的，但是函数表达式只有变量提升。
+
+    //区别2. 是否可以定义完函数就立即调用函数，函数表达式是具备的，但是函数声明不具备
+
+    var foo = function(){
+        console.log(1);
+    }();//立即调用

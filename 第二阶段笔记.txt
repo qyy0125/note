@@ -2243,6 +2243,11 @@ git 分支：
     git merge new : 合并new分支
     git branch -d new : 删除new分支
     git push origin new : 把new分支上传到github上
+	
+	
+	 git checkout -b mater
+	  git checkout news
+
 
 git tag : 生成里程碑
     git tag : 查看里程碑
