@@ -1,0 +1,47 @@
+Vite官网
+vscode搜索插件Vue Language Features (Volar)
+
+import axios from 'axios';
+const request=axios.create({
+	baseURL:'http://api.cpengx.cn/metashop/api'
+});
+//响应拦截器
+request.interceptors.response.use(
+	(response)=>{
+		if(response.status==200){
+			return response.data;
+		}else{
+			return response;
+		}
+	},
+	function (error){
+		return 	promise.reject(error)
+	}
+);
+
+export const getHomepage=(params)=>{
+	return request({
+		method:'GET',
+		url:'/homepage',
+		//?query=xxx
+		params,
+	});
+};
+
+Home.vue
+import * as api from " ../api/index"
+import{onMounted} from "vue";
+onMounted(async ()=>{
+	let result=await api.getHomepage();
+	console.log(result)
+})
+
+
+
+
+
+
+
+
+github常用样式
+normalizes.css

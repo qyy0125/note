@@ -1,8 +1,41 @@
 --------------------------------------------10.25第三阶段---------
+商城后台接口
+http://121.89.205.189/admindoc/
+
+maizuo效果
+http://www.young1024.com:1234/#/details/5599
+
+swiper官网
+https://www.swiper.com.cn/
+
+vant-ui组件官网
+https://vant-contrib.gitee.io/vant/#/zh-CN/tabbar
+
+https://www.bootcss.com/
+
+npm官网
+https://www.npmjs.com/
+
+bootstrap官网
+https://getbootstrap.com/
+
+node中文网
+http://nodejs.cn/
+
+https://es6.ruanyifeng.com/
+
+//react
+https://react.docschina.org/
+
 1. http://www.young1024.com:3008/
 2.vue开发文档 https://cn.vuejs.org/
 3.克隆上课代码
 $ git clone https://gitee.com/youngzl/dl2104.git
+
+v-show是通过css样式display:none来控制的,
+v-if是通过判断条件真假来是否渲染页面
+相同点：v-if与v-show都可以动态控制dom元素显示隐藏
+不同点：v-if显示隐藏是将dom元素整个添加或删除，而v-show隐藏则是为该元素添加css--display:none，dom元素还在。
 
 vue使用v-model实现这些标签数据的双向绑定，输入框的内容和div里的内容同步
 <div id="app">
@@ -746,8 +779,6 @@ axios.post('news',{type:'财经',size:30}).then(res=>{
 基于web留言板的设计与实现
 学校表白墙管理系统
 
-http://www.young1024.com:1234/#/details/5599
-http://121.89.205.189/admindoc/
 
 --------------------------------------------------------10.29----------------------------------------------------------
 注册组件
@@ -985,3 +1016,1390 @@ props属性支持两种常见的写法形式数组(不可以设置默认值)和�
 		el:'#app'
 	})
 </script>
+
+-----------------------------------------------------------------------11.1--------------------
+-----------------------------------------------------------------------11.2--------------------
+vscode 安装插件vetur代码快捷键
+ vue ui
+ 1.安装
+npm i -g @vue/cli
+ps：如果你的电脑有安装之前版本的脚手架工具，要卸载的话，要通过他的卸载命令去卸载
+npm uninstall vue-cli -g
+2.检查是否安装好
+vue -V 或者 vue --version
+出现版本号就说明安装好了
+3.创建项目
+vue create 项目名称
+vue create demo  
+4.选择第三个在未来选择
+Manually select features
+5.用空格选择这四个
+Choose Vue version
+Bable
+Router
+Vuex
+6.选择2.x
+9.
+cd demo
+npm run serve
+
+public静态文件不会被打包，原封不动
+
+2.src 项目源代码
+assets会被打包
+components项目放组件文件夹
+router路由配置文件
+store仓库配置文件
+views页面文件夹
+main.js项目入口文件，项目跑起来时会经过它
+App.vue整个项目视图文件，所有要展示的界面都要通过这个文件
+--------------------------------------------------------11.3------------------------------
+路由
+{
+        path:'cinemainfo/:id',
+        name:'cinemainfo',
+        component: () => import('../views/cinema/cinemainfo.vue')
+      }
+	  
+别的地方跳过来并传参
+methods:{
+    goinfo(info){
+        this.$router.push({name:'cinemainfo',params:{id:info.cinemaId}})
+    },
+
+ //监听路由变化
+        watch: {
+            '$route': function (e) {
+                this.$axios
+                    .get("/api/getCinemaFilmSchedules", {
+                        params: {
+                            cinemaId: e.params.id,
+                            filmId: e.params.cid,
+                            date: e.params.time
+                        },
+                    })
+                    .then((res) => {
+                        this.list = res.data.data.schedules;
+                    });
+            }
+        }
+		
+		
+		
+		
+------------------------------------------------------11.18-------------------
+附：mysql数据库
+show databases;
+use 数据库名;
+source E:\students.sql;
+
+
+./不能省略当前路径
+
+1.常用的全局变量
+__dirname 获取当前执行文件所在目录，不包括当前执行文件名
+__filenaame 完整文件路径
+require()引入一个模块
+var jquery=require('jquery')
+console.log() 打印到控制台
+console.dir
+module 导出模块
+module.exports={add:add,age:age};
+exports.add=add;
+定时器
+setInterval(function(){},2000)
+setTimeout
+
+2.路径拼接
+var path=require('path')
+path.dirname(path.dirname(__dirname) //返回__dirname父级文件夹
+
+//当前所在文件或者文件夹
+path.basename(路径)
+
+//路径拼接(路径可能形式不一样 '/'  '\')
+path.join(__dirname,'a','b')
+
+3.fs文件系统 文件读取
+var fs=require('fs');
+//文件读取信息，如果没有这个文件则报错
+fs.stat('文件路径',callback(err,res){
+	console.log(res.isFile());//判断是否是一个文件
+	console.log(res.isDirectory());//判断是否是一个文件夹
+}
+//读到文件里面的内容,如果不传解析编码，得到一个Buffer文件，可以通过info.toString()转化
+fs.readFile('./test.txt','utf8',function(err,info){
+	
+})
+
+4.文件写入会覆盖之前文件的内容
+fs.writeFile('./test.txt','aaa',function()){}
+fs.writeFile('./test.txt','',{flag:'a+'},function()){}
+r+ 打开文件用于读写
+w+ 打开文件用于读写，将流定位在文件内容开头
+a 打开文件用于写入，将流定位在文件内容末尾
+a+ 打开文件用于读写，将流定位在文件内容末尾
+
+5.删除文件
+fs.unlink()
+
+//添加到最后
+fs.appendFile()
+
+//文件复制
+var read=fs.createReadStream()
+var write=fs.createWriteStream()
+read.pipe(write);
+
+6.导出模块
+module expores{}
+导入模块
+require()
+----------------------------------------11.19---------------------------------------
+npm init -y
+1.crypto加密
+//MD5加密
+var crytpo=require('crytpo')
+var crytpo=require('crytpo')
+var md5 =crytpo.createHash("md5");//创建
+var md5Sum=md5.update("hello");//加密
+var result=md5Sum.digest('hex);
+//digest方法一个对象只能用一次
+var result2=crytpo.createHash("md5").update("hello1").digest('hex);
+
+//sha256加密
+var crytpo=require('crytpo');
+var sha=cyrpto.createHmac('sha256','yy123');//需要加密码
+var shaSum=md5.update("hello");//加密
+var result=shaSum.digest('hex);
+
+
+express创建服务器第三方框架
+https://www.expressjs.com.cn/
+官网切换4.0文档
+1.安装
+npm i express --save
+2.使用 创建服务
+var express=require('express');
+//express是一个对象也是一个函数
+//函数：会创建出一个可以管理服务器的对象，比如监听端口
+//对象：提供一些中间件
+var app=express();
+
+//创建静态目录
+express.static
+app.use(express.static(path.join(__dirname,'public')))
+
+//设置一个get路由
+//所有通过浏览器地址访问到的都是get请求
+//get(路径,回调函数(req所有请求相关的都在这个对象,res所有需要响应的){})
+app.get('/',function(req,res){
+	res.send('这是首页内容');//返回一个字符串给客户端
+})；
+
+//post请求
+app.post('/test',function(req.res){
+	res.send('post请求')
+})
+
+
+//监听服务器端口
+app.listen(2104,function(){console.log('服务器启动成功')});
+
+//本机地址 localgost 127.0.0.1
+
+
+----
+//设置中间件
+app.use()所有路由都经过这
+
+//设置静态页面
+app.use(express.static(path.join(__dirname),public)))
+
+postman模拟post发送数据
+req.body不能直接获取到post方式提交过来的数据，需要配置中间件来接受post提交的数据
+app.use(express,urlencoded({extend:false}));
+
+app.get('/:id',function(req,res){
+	console.log(req.params) //{id:'xxx'}
+})
+
+app.use(express.static(path.join(__dirname,'public')))
+// 如果要接受到post提交的数据就必须要配置下面的这个中间件
+app.use(express.urlencoded({extended:false}))
+app.post('/test',function(req,res){
+	// req.body不能直接获取到post提交过来的数据的
+	// 需要配置一个中间件，才可以获取到post方式提交过来的数据
+	console.log(req.body);//从postman模拟发送数据
+})
+
+res.json({
+	code:200,
+	mag:'sss',
+	data:[]
+	})
+
+//重定向 当访问/test跳转到/
+app.get('/test',function(req,res){
+	res.redirect('/')
+})
+
+//返回一个文件内容，需要传入一个文件路径
+res.sendFile(path.join(__dirname,'a.txt'))
+
+//下载文件，需要传入一个文件路径，访问这个路由，这个文件才会被下载
+app.get('/test',function(req,res){
+	res.download(path.join(__dirname,'a.zip'))
+	})
+	
+//返回一个模板，前提设置模板引擎和模板目录
+app.set('view engine','ejs');
+app.set('views',path.join(__dirname,'views')
+
+//自己会去模板目录中找对应的文件名test 参数1模板名称 参数2返回给模板的数据
+res.render('test',{
+	name:'qyy',
+	age:'22'
+})
+
+//set()给当前的app设置一些属性 设置模板引擎
+安装ejs模板引擎
+npm i ejs --save
+
+app.get('/test1',function(req,res){
+	// res.render('test') 
+	res.render('test',{
+		code:'200',
+		username:'cc',
+		list:[
+		{
+			name:'yy',
+			age:19
+		},
+		{
+			name:'yy2',
+			age:29
+		},
+		{
+			name:'yy3',
+			age:39
+		}
+		]
+	})
+
+	<%- %>  解析输出,会解析html标签
+	<%= %>  原样输出，会把html标签当做字符串输出
+	<% %> 无输出，用于流程控制
+	
+	<% for(var i=0;i<list.length;i++){ %>
+	<li>
+		<%- list[i].name %>
+		<%- list[i].age %>
+	</li>
+	
+	<% } %>
+	
+抽离公共的部分到公共的文件中
+<%= include('./header.ejs) %>
+
+------------------------------------------------------------------------------11.12 第四周--------------------------------------------------------
+req所有请求过来的数据都可以从这里获取
+req.params 获取动态路由参数
+req.query 获取get 提交的参数 ?后面的参数
+req.body 获取post表单提交的参数，需要设置中间件
+
+res 所有从服务器端响应给客户端的都是通过这
+res.send() 返回字符串
+res.sendFile() 返回一个文件
+res.render() 返回一个模板,前提要先设置模板引擎和模板目录
+
+
+--------------------mongodb-----------------
+mongodb非关系型数据库
+npSQL 不需要专门的语法去操作数据库
+mysql oracle sqlserve 这些都是关系型数据库 都需要用sql操作
+https://www.mongodb.com/try/download/community
+Tools下载MongoDB Shell
+进入bin目录cmd 或者进入bin复制路径配置环境变量任意控制台都能打开
+控制台输入mongo 后面有箭头安装成功
+ 
+show dbs  查看所有数据库
+use dl2104 创建数据库
+db.dl2104.insert({name:aa}) 插入数据
+
+删除数据库
+use dl2104  //打开使用数据库
+db.dropDatabase()
+
+show collections  //查看集合
+db.createCollection('stus') //创建集合
+db.stus.drop()  //删除集合
+db.stus.insert({name:'yy2'})
+db.stus.find({name:'yy2'}) //字段
+
+db.stus.update({name:'yy2'},{name:'yy1}) //更新第一条数据
+
+db.stus.remove({name:'yy2'})//会把这个条件的数据都删掉
+
+// 引入mongoose第三方模块 用来操作数据库
+const mongoose = require('mongoose');
+// 数据库连接
+mongoose.connect('mongodb://localhost/playground')
+	// 连接成功
+	.then(() => console.log('数据库连接成功'))
+	// 连接失败
+	.catch(err => console.log(err, '数据库连接失败'));
+
+
+--------------------------------------mongoose-----
+中文文档
+http://www.mongoosejs.net/
+概念
+	Schema:和数据库中的字段一一对应的模型,只是对应关系不能操作数据库
+	model:可以用来操作数据库.需要通过Schema创建出来
+1.安装 npm i mongoose --save
+2.使用
+(1)index.js导入mongoose
+	var mongoose=require('mongoose')'
+(2)连接数据库 'mongodb://地址:端口/数据库名称
+	mongoose.connect('mongodb://localhost:27017/dl2104')
+(3)创建Schema
+	var schema=mongoose.Schema({
+		name:String,
+		age:Number
+	},{collection:'stu')//指定集合
+(4)查询操作
+	var model=mongoose.model('stu',schema)
+	model.find((err,info)=>{
+		console.log(info)
+	})
+增加数据
+var stu=new model({
+	name;'qyy',
+	age:10
+})
+stu.save((err,info)=>{
+	console.log(info)
+})
+------------------------------axios请求拦截器----------------
+axios.interceptors.request.use(config=>{
+   /*  console.log(config); */
+    config.headers.Authorization=window.sessionStorage.getItem('token');
+    console.log(config);
+    return config;
+})
+
+----------------------react-----------------
+vscode 安装插件JS JSX Snippet代码提示;  Auto Import =>class组件输入rcc按下tab
+function组件rfc按下tab键
+
+npm i -g create-react-app
+npm i -g yarn
+
+npx create-react-app  demo demo是项目名称 npx是node自带的
+cd demo
+yarn start 启动项目
+
+
+public静态资源文件
+src项目源代码
+index.js项目入口文件，项目跑起来时会经过它
+app.js 视图(我们看到的页面)入口文件
+
+yarn eject 抽离配置文件
+
+虚拟dom
+组件系统
+jsx
+
+开发
+1.把多余的文件删除只留下index.js App.js App.css index.css
+
+函数式组件需要return一个jsx对象 命名规则,首字母要大写,不然可能会被当成原生的
+function H2(props){
+console.log(props)//name="yy"
+	<h2>3443</h2>
+}
+ReactDOM.render(
+	<H2 name="yy"></H2>//组件都是当做标签用
+	)
+
+
+function组件  class组件有状态
+
+
+--------------读取文件------------------------------
+import React, { Component } from 'react';
+
+class App extends Component {
+    //通过React.createRef()创建Refs并通过ref属性联系到React组件
+    // 创建一个ref去储存input DOM元素
+	// 此时声明的fileref 是属于类里面的属性, 所以不用加声明变量关键字了  const let var
+    fileref=React.createRef();
+    imgRef = React.createRef();
+    choose=(e)=>{
+        console.dir(this.fileref.current.files[0])
+        var img=this.fileref.current.files[0]; //获取到选择的图片文件
+        var reader=new FileReader(); //创建读取文件的对象
+        reader.readAsDataURL(img); //把选择图片转成base64图片格式
+        reader.onload=()=>{
+            // console.log(reader.result); //reader把上面读取文件,转换完了之后执行
+            this.imgRef.current.src=reader.result; //就是转换的结果 , 需要把这个结果赋值 img标签的src
+        }
+    }
+    render() {
+        return (
+            <div>
+                {/* 告诉React我们想要将<input>的ref和构造器中创建的fileref联系起来 */}
+                <input type="file" ref={this.fileref} onChange={this.choose}/>
+                <img src='' ref={this.imgRef}></img>
+            </div>
+        );
+    }
+}
+
+export default App;
+
+
+-------------------受控组件----------------------
+// 非受控组件, 它的value是他自己维护的,而不是通过state
+
+
+-----------------------------------reacr路由
+安装5.0
+react-router-config 静态路由配置
+快捷键rfc
+yarn add react-router-dom@5.3.0
+
+
+App.js
+import {BrowserRouter as Router,Router} from 'REACT-ROUTER-DOM'
+//
+import name from './pages/name'
+
+
+
+
+
+https://v5.reactrouter.com
+
+npm i react-router-config
+
+$ npm install --save react-router-dom@5.3.0
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+const routers=[
+	{
+		
+	}
+]
+export default routers;
+
+
+
+
+--------------------------------------------------
+App.js
+import React from 'react';
+import { Route } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config'
+import routers from './router'
+// import Three from './pages/Three'
+const Three = React.lazy(()=>import('./pages/Three'))
+function App() {
+  return (
+    <div>
+      {/* 包裹懒加载的组件 */}
+      <React.Suspense fallback={<div>loading...</div>}>
+        { renderRoutes(routers) } 
+        <Route path="/three" component={Three}></Route>
+      </React.Suspense>
+    </div>
+  );
+}
+export default App;
+
+
+router index.js
+import React from "react";
+// React.lazy()  懒加载一个组件
+// 懒加载的组件需要在外层 使用React.Suspense组件包裹
+// Suspense有个fallback属性, 这个属性接收一个组件,这个组件是等待懒加载的组件的过程中的显示组件
+const routers = [
+  {
+    path:'/one',
+    component: React.lazy(()=> import('../pages/One') ),
+    routers:[
+      {
+        path:'/one/aa',
+        component: React.lazy(()=> import('../pages/Aa') )
+      },
+      {
+        path:'/one/Bb',
+        component: React.lazy(()=> import('../pages/Bb') )
+      }
+    ]
+  },
+
+  {
+    path:'/two',
+    component: React.lazy(()=> import('../pages/Two') )
+  },
+
+]
+export default routers;
+
+-------------------
+ant design 
+
+局部样式
+npm i styled-components
+import styled from 'styled-components'
+
+const Div=styled.div`
+	color:red;
+`
+<Div></Div>
+
+--------------------------------------------------
+npm i axios --save
+配置反向代理
+https://create-react-app.dev/docs/proxying-api-requests-in-development
+
+npm install http-proxy-middleware --save-dev
+或者
+yarn add http-proxy-middleware
+
+创建 src/setupProxy.js and place the following contents in it:
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+module.exports = function(app) {
+  app.use(
+    '/api',
+    createProxyMiddleware({
+      target: 'http://localhost:5000',
+      changeOrigin: true,
+    })
+  );
+};
+------------------------------
+1.函数式组件rfc
+function H2(props){
+  console.log(props)
+  return <h2>这是函数式的内容</h2>
+}
+
+ReactDOM.render( 
+  <H2 name="yy" age="18"></H2>,  // 组件都是当做标签使用的
+  // H2('yy'),  // 这种也很少用
+  document.getElementById('root')
+);
+2.类组件rcc
+class App extends React.Component{
+  render(){
+    console.log(this.props)
+    return <h2>这是类组件的内容</h2>
+  }
+}
+
+ReactDOM.render( 
+  <App name="yy" age="88" />,
+  document.getElementById('root')
+);
+
+3.空标签index.js
+import React from 'react';
+import ReactDOM from 'react-dom'; 
+
+
+function Demo(){
+  return <div>demo</div>
+}
+
+function Test(){
+  return <div>Test</div>
+}
+
+
+class App extends React.Component{
+  render(){
+    // console.log(this.props)
+
+    // () 把一个jsx包裹起来,代表这个括号里面就是一个对象 
+    // () 推荐写发
+    // return (
+    //   <div> 
+    //     <h2>这是类组件的内容</h2>
+    //     <Demo></Demo>
+    //     <Test></Test>
+    //   </div>
+    // )
+
+    // 如果不加括号, return 后面就必须加一个  <
+    // 一样可以用,但是可能就不太直观,随意就不推荐
+    // 如果是把代码都写在一行,那就无所谓了
+    /* 
+    return <
+      div> 
+         <h2>这是类组件的内容</h2>
+       <Demo></Demo>
+         <Test></Test>
+      </div>
+    */
+
+
+    // <></> <React.Fragment></React.Fragment> 这两个都代表是空标签,不会被解析
+    /*
+    return (
+      <>
+        <h2>这是类组件的内容</h2>
+        <Demo></Demo>
+        <Test></Test>
+      </>
+    )
+
+    */
+    
+
+    return (
+      <React.Fragment>
+        <h2>这是类组件的内容-</h2>
+        <Demo></Demo>
+        <Test></Test>
+
+      </React.Fragment>
+    )
+
+
+  }
+}
+
+ReactDOM.render( 
+  <App name="yy" age="88" />,
+  document.getElementById('root')
+);
+
+4.设置props默认值
+import React from 'react';
+import ReactDOM from 'react-dom'; 
+
+import PropType from 'prop-types'
+
+//  props 是接受组件属性传进来的值,
+//  在jsx中遇到了大 {}, 里面的值被解析
+
+function Demo(props){
+  console.log(props)
+  return <h2>传进来的是:{ props.age }--{props.name}</h2>
+}
+// 给函数式组件的参数设置默认值
+// 定义好函数组件后,通过defaultProps 设置默认值
+/* 
+Demo.defaultProps = {
+  age: 16
+}
+*/
+
+// 如果需要规定传值类型, 就需要引入第三方库 prop-types
+Demo.defaultProps = {
+  age: PropType.number.isRequired  //这个参数必填 
+}
+
+
+
+class Test extends React.Component{
+  //类组件 设置props的默认值
+  // static defaultProps = {}
+
+  static defaultProps = {
+    age: 12
+  }
+  render(){
+    return <h3>Test {this.props.age}</h3>
+  }
+}
+
+
+
+
+
+class App extends React.Component{
+  render(){
+    return (
+      <>
+      {/* 需要要数字或者变量 需要使用{} 并且去除""  */}
+       <Demo age="12" name="young"></Demo>
+
+       <Test age="221"></Test>
+      </>
+    )
+  }
+}
+
+ReactDOM.render( 
+  <App/>,
+  
+  document.getElementById('root')
+);
+
+5.state
+// state 状态
+// 函数式组件没有状态(目前没有,后面可以通过hooks有) 
+
+
+
+
+
+class App extends React.Component{
+  // 定义state的方式一
+  /*
+    state = {
+      msg: 'hello'
+    }
+  */
+
+  // 方式二
+  // 通过构造函数constructor
+
+  // 需要写了constructor构造函数,props就必须要写上,
+  // 然后函数内的第一句话也要 先上 super(props) 
+  // super(props) 如果不写当前组件中this就不是当前实例
+  // 也拿不到props的值
+  constructor(props){
+    super(props)
+    this.state = {
+      msg: 'react'
+    }
+  }
+
+
+  render(){
+    return (
+      <>
+        <h2>这是app组件</h2>
+        <div>{this.state.msg}</div>
+
+        {/*  
+          state中的数据发生改变,也会触发视图更新, 
+          也就是重新执行render方法
+        */}
+        <button onClick={()=>{
+          this.setState({
+            msg: 'react ------- ok'
+          })
+        }}>
+           改变自己
+        </button>
+      </>
+    )
+  }
+}
+
+6.数组渲染方式
+// 如果{} 里面是一个数组,那么数组是可以直接显示的
+// 如果里面的元素都是jsx对象对象呢?,jsx也会被解析
+ <ul>  
+        {
+          this.state.arr.map((item,index)=>{
+            return <li key={index}>{item}</li>
+          })
+        } 
+ </ul>
+
+7.// 阻止默认事件e.preventDefault(); 
+
+8.this
+// 箭头函数这种推荐使用,应为可以直接拿到this
+test2 = ()=>{
+    this.setState({
+      num: ++this.state.num
+    })
+  }
+
+//调用函数的时候通过bind()绑定this
+<button onClick={this.test4.bind(this)}>test3-1</button>
+
+//在构造函数中预先把test5绑定this
+constructor(props){
+    super(props);
+
+    //把test5绑定了this
+    this.test5 = this.test5.bind(this)
+  }
+
+
+9.事件对象
+class App extends Component {
+
+  state = {
+    num:0
+  }
+
+
+  // 默认的第一个参数就是一个事件对象
+  test = (e)=>{ 
+    console.log(e)  
+  }
+
+
+  // 需要传参, 通常是把事件对象写在最后
+  test2 = (num,e)=>{ 
+    this.setState({
+      num
+    })
+    console.log(e)  
+  }
+
+
+  
+  render() {
+    return (
+      <div>
+        <h2>这是app组件</h2>
+
+        <div>{this.state.num}</div>
+        {/*
+          <button onClick={this.test()}>test</button>
+          绑定的时间函数是不能加()括号的, 
+          加了括号就会被执行,下次执行的时候就没有函数可以调用了 
+        */}
+
+       
+        <button onClick={this.test}>test</button>
+
+
+         {/* 
+          需要需要传值,就可以在外面再套一层箭头函数 
+          点击的时候执行是箭头函数
+          在函数里面再调用我们定义的函数,
+          就可以实现传值了
+        */}
+        <button onClick={(e)=>{
+          this.test2(20,e);
+        }}>test2</button>
+      </div>
+    );
+  }
+}
+
+
+10.bind传参
+class Demo1 extends Component {
+    state = {
+        num:0
+      }
+    
+      //  test是通过 this.test.bind() 调用的, 最后一个参数就是事件对象
+      test = (age,name,e)=>{ 
+        console.log(age,name)//18 'yy
+        console.log(e)  
+        // event
+      }
+    
+      render() {
+        return (
+          <div>
+            <h2>这是app组件</h2>
+    
+            <div>{this.state.num}</div>
+            {/*  在外面不嵌套箭头函数,  通过bind传参 , 事件对象会默认传在最后  */}
+            <button onClick={this.test.bind(this,18,'yy')}>test</button>
+          </div>
+        );
+      }
+}
+
+11.获取输入框的值
+class App extends Component {
+
+  state = {
+    firtname:'',
+    lastname:''
+  }
+  
+  first = (e)=>{
+    // 通过事件对象获取到输入框的值
+    // console.log(e.target.value)
+    this.setState({
+      firtname: e.target.value
+    })
+  }
+
+  last = (e)=>{
+    this.setState({
+      lastname: e.target.value
+    })
+  }
+
+
+  render() {
+    return (
+      <div>
+        <h2>这是app组件</h2>
+
+
+        <div>
+          {/* 这个输入框输入的值 赋值给 firtname */}
+          <div>{this.state.firtname}</div>
+          firtname:<input onChange={this.first}></input>
+        </div>
+
+        <div>
+          {/* 这个输入框输入的值 赋值给 firtname */}
+          <div>{this.state.lastname}</div>
+          lastname:<input onChange={this.last}></input>
+        </div>
+
+        <div>全名: {this.state.firtname +' ' +this.state.lastname} </div>
+        
+      </div>
+    );
+  }
+}
+
+12.受控组件--------------------
+class App extends Component {
+
+  state = {
+    lastname:''
+  }
+  
+  // 这个方法的作用: 输入值赋值给lastname, 这个input的value就是赋值后的lastname
+  test =(e)=>{
+    this.setState({
+      lastname: e.target.value
+    })
+  }
+
+
+  render() {
+    return (
+      <div>
+        <h2>这是app组件</h2>
+
+        <div>
+          {/* 受控组件  */}
+          {/*  此时的value不是它自己的,而是通过lastname控制了 ,下面的111不能写,不然就出错了 */}
+          <input type="text" value={this.state.lastname} onChange={this.test}>111</input>
+        </div>
+      </div>
+    );
+  }
+}
+
+13.读取图片文件
+
+import React, { Component } from 'react';
+
+class App extends Component {
+
+  fileRef = React.createRef();
+  imgRef = React.createRef();
+  
+  choose = (e)=>{
+    // console.dir()
+    var img = this.fileRef.current.files[0]  //获取到选择的图片文件
+ 
+    var reader = new FileReader()  //创建读取文件的对象
+    reader.readAsDataURL(img)  //把选择图片 转成base64的图片格式
+
+    var that = this;
+    reader.onload = function(){  //reader把上面读取文件,转换完了之后执行 
+      // reader.result //就是转换的结果 , 需要把这个结果赋值 img标签的src
+
+      // console.log(reader.result)  // == this.result
+      that.imgRef.current.src = reader.result
+    }
+
+
+
+  }
+
+  render() {
+    return (
+      <div>
+        
+        <input type="file" ref={this.fileRef} onChange={this.choose}></input>
+        
+
+        <img src=""  ref={this.imgRef} />
+
+
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+14.父给子传值
+import React, { Component } from 'react';
+
+//  子
+class Child extends Component{
+  render(){
+    return (
+      <div>
+        <h2>{this.props.msg}</h2>
+      </div>
+    )
+  }
+}
+
+//父
+class App extends Component {
+  state = {
+    msg:'hello'
+  }
+  render() {
+    return (
+      <div>
+
+        <Child msg={this.state.msg}></Child>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+15.子向父传值,通过调用父组件的方法
+import React, { Component } from 'react';
+
+class My extends Component {
+    state={
+        name:'yy',
+    }
+    test(num){
+        console.log(num)
+        this.setState({
+           
+        })
+    }
+    render() {
+        return (
+            <div>
+                <h1>parent</h1>
+    
+                <Child fun={this.test} msg={this.state.name}></Child>
+            </div>
+        );
+    }
+}
+class Child extends Component {
+    render() {
+        return (
+            <div>
+               <h2>child</h2>
+               {this.props.msg}
+               <button onClick={()=>{this.props.fun(8)}}>点击</button>
+            </div>
+        );
+    }
+}
+export default My;
+
+16.高阶组件
+import React, { Component } from 'react';
+
+const withTest = (Com)=>{
+    return class extends Component{
+      state = {
+        flag:'aaaaaaaaaaaaaaa'
+      }
+      componentDidMount(){
+        console.log('aa')
+      } 
+      render(){
+        return <Com flag={this.state.flag}></Com>
+      }
+    }
+  }
+
+class My extends Component {
+    
+    render() {
+        return (
+            <div>
+                <h1>my</h1>
+                {this.props.flag}
+               
+            </div>
+        );
+    }
+}
+
+My=withTest(My)
+
+export default My;
+
+
+17.redux
+npm install --save redux
+npm install --save react-redux
+import React, { Component } from 'react';
+
+// 1.从redux导入 createStore()方法
+// 这个方法是用来创建仓库的
+import { createStore } from 'redux';
+
+// 3. 创建reducer
+// 参数1 : 是仓库的初始值
+// 参数2 : 是操作仓库的指令 
+
+function counterReducer(state={count:0},action){
+  switch(action.type){  // type就是操作仓库的指令
+    case 'add':  // 自增的操作
+      return {
+        count: state.count+1
+      }
+    case 'sub':  // 自减的操作
+      return {
+        count: state.count-1
+      }
+    case 'set10': // 直接设置为10de操作
+      return {
+        count:10
+      }
+     default:  // 啥指令都没有,就是取值
+      return state
+  }
+}
+
+// 2. createStore() 参数是一个reducer 
+// reducer是仓库, 以及是操作这个仓库的方法
+const store = createStore(counterReducer);
+
+class Demo extends Component{
+
+  constructor(props){
+    super(props);
+    this.state = store.getState();
+
+    store.subscribe(()=>{
+      this.setState(store.getState())
+    })
+  }
+
+  render(){
+    return (
+      <div>
+        <hr/>
+
+        {this.state.count}
+      </div>
+    )
+  }
+}
+
+
+
+class App extends Component {
+
+  constructor(props){
+    super(props)
+
+    // 4.store.getState() 是取到仓库中的值
+    this.state = store.getState();
+
+    //this.state = {count: 0}
+
+    // console.log(store.getState())
+    
+
+    // 5.  store.subscribe() 当仓库的值就变化的时候,就会触发这个方法
+    store.subscribe(()=>{
+      // console.log(this)
+      // console.log(store.getState())
+      // this.state = store.getState()
+
+      this.setState(store.getState())
+    })
+
+  }
+
+  // 6.
+  addCount =()=>{
+    // 通过dispatch 触发操作仓库的方法
+    store.dispatch({type:'add'})
+
+    setTimeout(()=>{
+      // console.log(store.getState())
+    },2000)
+  }
+
+
+  subCount = ()=>{
+    store.dispatch({type:'sub'})
+  }
+
+  render() {
+    return (
+      <div>
+        
+        <div>
+          {this.state.count}
+        </div>
+        <button onClick={ this.addCount }>add</button> 
+        <button onClick={ this.subCount }>sub</button>
+        <button onClick={ ()=>{store.dispatch({type:'set10'})} }>set10</button>
+       
+        <br/>
+
+        <Demo></Demo>
+
+
+      </div>
+    );
+  }
+}
+export default App;
+
+
+18.合并仓库
+function msgReducer(state={name:'dd'},action){
+    switch(action.type){  // type就是操作仓库的指令
+     
+       default:  // 啥指令都没有,就是取值
+        return state
+    }
+  }
+
+const store = createStore(combineReducers({
+  counter:counterReducer,
+  msger: msgReducer
+}));
+
+
+{this.state.counter.count}
+{this.state.msger.name}
+
+19.组件 
+
+import {
+  BrowserRouter as Router,  // 路由的根组件-通常是包裹在最外层就可以了
+  Route,  // 配置路由的出口, 匹配到路径后要显示的内容
+  Switch,  //只匹配一个路由
+  Link,  // 声明式导航
+  Redirect,  // 重定向组件
+} from 'react-router-dom';
+
+import { renderRoutes } from 'react-router-config'
+
+import routers from './router/index'
+
+
+function App() {
+  return (
+    <Router>
+      <div>
+        <ul>
+          <li><Link to="/one">one</Link></li>
+          <li><Link to="/two">Two</Link>   </li>
+          <li> <Link to="/three">three</Link>  </li>
+        </ul>
+
+        {/* <Route path="/one" component={One}></Route>
+        <Route path="/two" component={Two}></Route>
+        <Route path="/three" component={Three}></Route> */}
+
+        <hr></hr>
+        <Switch>
+          {renderRoutes(routers)}
+        </Switch>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+
+
+---index.js----
+import One from '../pages/One';
+import Two from '../pages/Two';
+import Aa from '../pages/Aa';
+import Bb from '../pages/Bb';
+
+
+// 配置路由对象数组
+const routers = [
+  {
+    path:'/one',
+    component: One,
+    routers:[
+      {
+        path:'/one/aa',
+        component: Aa
+      },
+      {
+        path:'/one/Bb',
+        component: Bb
+      }
+    ]
+  },
+
+  {
+    path:'/two',
+    component: Two
+  },
+
+]
+
+export default routers;
+
+
+-------------------vue3--------------------
+<template>
+  <div class="about">
+    <h1>{{count.num}}</h1>
+    <button @click="add">add</button>
+  </div>
+</template>
+<script>
+import { reactive } from '@vue/reactivity';
+
+export default {
+  setup(props,context) {
+    let count=reactive({ //让下面改变的值也在页面上变化
+      num:0
+    });
+    return {
+      count,
+      add:function(){
+        count.num++
+        console.log(count.num) 
+      }
+    }
+  },
+}
+</script>
+
+
+shallowReactive监听了第一层属性的值，一旦发生改变，则更新视图;其他层，虽然值发生了改变，但是视图不会进行更新
+
+
+----------------------------------Vue3---------------------
+1、beforeCreate -> 使用 setup()
+
+2、created -> 使用 setup()
+
+3、beforeMount -> onBeforeMount
+
+4、mounted -> onMounted
+
+5、beforeUpdate -> onBeforeUpdate
+
+6、updated -> onUpdated
+
+7、beforeDestroy -> onBeforeUnmount
+
+8、destroyed -> onUnmounted
+
+9、errorCaptured -> onErrorCaptured
+
+
+
+
+

@@ -1,3 +1,72 @@
+数组方法
+(1)toString() 把数组转换为数组值（逗号分隔）的字符串  不改变原数组
+(2)join() 方法也可将所有数组元素结合为一个字符串。它的行为类似 toString()，但是您还可以规定分隔符  不改变原数组
+(3)pop() 方法从数组中删除最后一个元素 返回删除的那一个值 改变原数组 
+<p id="demo"></p>
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits.pop(); //Mango
+console.log(fruits);//["Banana", "Orange", "Apple"]
+</script>
+(4)push() 弹出方法（在数组结尾处）向数组添加一个新的元素 返回数组新长度 改变原数组
+<p id="demo"></p>
+<script>
+	var fruits = ["Banana", "Orange", "Apple", "Mango"];
+	document.getElementById("demo").innerHTML = fruits.push("Kiwi"); // 5
+	console.log(fruits);//['Banana', 'Orange', 'Apple', 'Mango', 'Kiwi']
+	</script>
+(5)shift() 位移与弹出等同，但处理首个元素而不是最后一个。方法会删除首个数组元素，并把所有其他元素“位移”到更低的索引。改变原数组
+	<p id="demo"></p>
+	<script>
+	var fruits = ["Banana", "Orange", "Apple", "Mango"];
+	document.getElementById("demo").innerHTML = fruits.shift("Kiwi"); // Banana
+	console.log(fruits);//[ 'Orange', 'Apple', 'Mango']
+	</script>
+(6)unshift() 方法返回新数组的长度。
+	<p id="demo"></p>
+	<script>
+	var fruits = ["Banana", "Orange", "Apple", "Mango"];
+	document.getElementById("demo").innerHTML = fruits.unshift("Kiwi"); // 5
+	console.log(fruits);//['Kiwi', 'Banana', 'Orange', 'Apple', 'Mango']
+	</script>
+(7)concat() 方法不会更改现有数组。它总是返回一个新数组
+(8)splice 向数组添加或者删除
+(9)裁剪数组
+slice() 方法用数组的某个片段切出新数组 不会改变原数组
+	<p id="demo"></p>
+	<script>
+	var fruits = ["Banana", "Orange", "Apple", "Mango"];
+	document.getElementById("demo").innerHTML = fruits.slice(2); //Banana Orange
+	console.log(fruits);//['Banana', 'Orange', 'Apple', 'Mango']
+	</script>
+
+	<p id="demo"></p>
+	<script>
+	var fruits = ["Banana", "Orange", "Apple", "Mango"];
+	document.getElementById("demo").innerHTML = fruits.slice(0,2); //Banana Orange
+	console.log(fruits);//['Banana', 'Orange', 'Apple', 'Mango']
+	</script>
+	
+所有字符串方法都会返回新字符串。它们不会修改原始字符串。
+正式地说：字符串是不可变的：字符串不能更改，只能替换。
+
+有三种提取部分字符串的方法：
+	slice(start, end)//不包括结束位置
+	substring(start, end)////不包括结束位置
+	substr(start, length)
+
+把字符串转换为数组
+可以通过 split() 将字符串转换为数组：
+var txt = "a,b,c,d,e";   // 字符串
+var a=txt.split(",");          // 用逗号分隔
+var b =txt.split("");          // 用空格分隔
+var c =txt.split("|");          // 用竖线分隔
+console.log(txt);
+console.log(a);//['a', 'b', 'c', 'd', 'e']
+console.log(b);//['a', ',', 'b', ',', 'c', ',', 'd', ',', 'e']
+console.log(c);//['a,b,c,d,e']
+
+
 (-)indexOf() 方法可返回某个指定的字符串值在字符串(数组)中首次出现的位置。在则返回所在字符串（数组）下标；不在则返回-1
 var arr=['mounted','component','bus']
         var str='abcd'
@@ -2112,6 +2181,9 @@ module.exports={
                 git checkout commitId xxxx : 把指定版本的xxxx状态同步到工作区和暂存区
                 git checkout -- xxxx : 把暂存区的xxxx状态同步到工作区
 
+git push -u origin login//爸本地分枝推送到码云login分枝上
+
+
 
 // github网站和多人协作：
 
@@ -2171,6 +2243,11 @@ git 分支：
     git merge new : 合并new分支
     git branch -d new : 删除new分支
     git push origin new : 把new分支上传到github上
+	
+	
+	 git checkout -b mater
+	  git checkout news
+
 
 git tag : 生成里程碑
     git tag : 查看里程碑
@@ -2268,6 +2345,35 @@ $("input[type='checkbox']").prop("checked", function( i, val ) {
 
     </script>
 </body>
+-------------------------------------对象字面量-------------------------
+var person={
+    name："zhuzhenwei",
+    age：18
+};
+在末尾需加分号；表示结束。
+在一个属性定义之后用逗号分隔，最后一个属性不需要
+属性名可以加双引号，好处是我们可以包含错误的字符。并使用方括号表示法来访问对象的属性
+var person = {
+            "name": "zz",
+            "age": 18
+        };
+        console.log(person["name"]);//zz
+        console.log(person.name);//zz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 attr

@@ -1,0 +1,86 @@
+ul>li*8>img[src="./images/pic$.jpg"]+p{文本$文本}浮动的块级元素，宽度自适应
+        浮动的内联元素，可以设宽高
+		
+background-attachment
+块级 独占一行 可以设置宽高
+        行高可以撑开块级元素的高度
+        padding border margin 对块级生效
+        浮动的块级元素宽度自适应
+        div p h1 h2 h3 h4 h5 h6 ul li ol dl dt dd hr
+
+        内联 可以在一行显示，不可设置宽高
+        行高撑不开内联元素的高度
+        padding border margin 水平生效 垂直失效
+        浮动的内联元素可以设置宽高
+        a span img b i u em strong br
+		
+<style>
+       /* 
+       vertical-align  垂直对齐方式
+       img 默认值是base-line
+
+       方法一：
+       .all{height:200px; line-height:200px;}
+       .all img{vertical-align:middle;}
+
+       方法二：
+       img{vertical-align: middle;}
+       span{width: 0px; vertical-align: middle;height: 100%; display: inline-block;}
+       */
+
+     /*  div{width: 400px;height: 400px;background: #0f0; margin: 0 auto; text-align: center;line-height: 400px;}
+      img{width: 100px; vertical-align: middle;} *//*垂直对齐方式参照线为中线*/
+
+
+      div{width: 400px;height: 400px;background: #ccc; text-align: center;}
+      img{width: 100px;vertical-align: center;}
+      span{width: 0px; vertical-align: middle;height: 100%; display: inline-block;background: #000;}/*需要和图片写在一行上*/
+   </style>
+</head>
+<body>
+<!-- <div>
+    <img src="./images/img03.jpg" alt="">
+</div> -->
+
+<div>
+    <img src="./images/img04.jpg"><span></span>
+</div>
+</body>
+
+加了定位的支持以下几个属性：
+        top
+        bottom
+        left
+        right
+        上遇到下,听上的； 
+        左遇到右,听左的；
+
+        相对定位relative
+        1、不脱标占位
+        2、相对自己定位
+		
+绝对定位absolute
+       1、脱标不占位
+       2、相对包含块（距离自己最近的定位的盒子）定位，子绝父相
+          如果子盒子加了绝对定位，请给父盒子加相对定位，这样的话就会相对父盒子定位，
+          如果父盒子有其他的定位，就不需要改成相对定位了
+       3、不写坐标留原位（原来标准流里的位置）
+
+position: sticky;  top:0px
+粘性定位，脱标占位 需要有坐标才能生效
+
+电梯门
+<style>
+      div{width: 200px;height: 200px;background: #ff0;position: relative; margin: 0 auto;}
+      div::after{ content: "";position: absolute;width: 100px;height: 200px;background: #0f0;top: 0;left: 0;}
+      div::before{ content: "";position: absolute;width: 100px;height: 200px;background: #f00;top: 0;right: 0;}
+      div:hover::after{left: -100px;}
+      div:hover::before{right: -100px;}
+    </style>
+</head>
+<body> 
+  <div>你好</div>
+</body>
+
+ html,body{height: 100%;}    /*高度自适应窗口必备条件*/
+ 
