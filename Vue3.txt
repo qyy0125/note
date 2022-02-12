@@ -1,6 +1,7 @@
 Vite官网
 vscode搜索插件Vue Language Features (Volar)
 
+api/index.js
 import axios from 'axios';
 const request=axios.create({
 	baseURL:'http://api.cpengx.cn/metashop/api'

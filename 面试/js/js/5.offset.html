@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box1{
+            width: 200px;
+            height: 200px;
+            margin-top: 50px;
+            margin-left: 50px;
+            background: pink;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            /* position: relative; */
+        }
+        .box2{
+            width: 100px;
+            height: 100px;
+            background: blue;
+            margin-top: 10px;
+            margin-left: 10px;
+            border: 1px solid #ccc;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">
+        <div class="box2">
+
+        </div>
+    </div>
+    <script>
+        var box1=document.querySelector('.box1');
+        var box2=document.querySelector('.box2');
+
+        //offsetWidth=border+padding+width
+        console.log(box2.offsetWidth);//100
+        
+        console.log(box2.offsetLeft);//68 没有定位
+        // console.log(box2.offsetLeft);//10 有定位
+
+
+    </script>
+</body>
+</html>

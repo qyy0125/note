@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">点击修改值</button>
+    <hr/>
+    <!--  数据双向绑定-->
+    <h1 id="h1">222</h1>
+    <input type="text" id="inp">
+    <script>
+        var book={};
+        book.name="";
+        //参数1:要给哪个对象设置属性
+        //参数2:属性名称是啥
+        //参数3:对象,封装set,get方法
+        Object.defineProperty(book,"name",{
+            //一旦修改了属性,就会走到set方法,value是修改后的内容
+            set:function(value){
+                console.log("检测到数据被修改了",value);
+                //-------
+                h1.innerHTML=value;
+            },
+
+            //一旦读取属性,就会走到get方法
+            get:function(){
+                console.log("检测到读取数据");
+                return name+'--';//返回值,决定了将来调用book.name返回的值
+            }
+        });
+        var button=document.getElementById('btn');
+        button.addEventListener('click',function(){
+            book.name="我修改了数据"
+            console.log(book.name);
+        });
+
+        //-------------------------------------------------------------------------------
+
+        var input=document.getElementById('inp');
+        var h1=document.getElementById('h1');
+        inp.addEventListener('keyup',function(e){
+            console.log(e.target.value);
+            book.name=e.target.value
+        })
+
+
+    </script>
+</body>
+</html>

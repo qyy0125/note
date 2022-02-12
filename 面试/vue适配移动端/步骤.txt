@@ -1,0 +1,18 @@
+1. 安装两个插件
+npm i amfe-flexible --save
+npm i postcss-px2rem --save
+2. main.js引用
+import rem from 'amfe-flexible'
+Vue.use(rem);
+3. package.json
+"postcss":{
+    "autoprefixer":{},
+    "postcss-px2rem":{
+      "remUnit":75
+    }
+  }
+  
+75表示ui小姐姐给的图是按照750px这歌尺寸设计的
+4. 修改配置项需要重新启动npm run serve
+5. 需要在css中设置样式,在行内样式style里面写无效
+6.html的根元素font-size会根据屏幕的变化而变话,但是元素rem的值不会变化

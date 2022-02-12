@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 箭头函数中的this是在定义函数的时候绑定
+        //箭头函数根本没有自己的this,导致内部this就是外层代码块this,正是因为它没有this,所有不能用作构造函数
+        /* 所谓定义的时候绑定,就是this是继承自父执行上下文中的this,比如这里箭头函数的this就是与say平级以key:value的形式,也就是箭头函数本身所在的对象为obj,而
+        obj的父执行上下文是window */
+        var name=222
+        var obj={
+            name:111,
+            say:()=>{
+                console.log(this.name);
+            }
+        }
+        obj.say() //222
+
+        var obj2={
+            birth:1990,
+            getAge:function(){
+                var b=this.birth
+               
+                var fn=()=> new Date().getFullYear()-this.birth;
+                return fn();
+               
+            }
+        };
+        obj2.getAge();
+        
+        
+        
+    </script>
+</body>
+</html>

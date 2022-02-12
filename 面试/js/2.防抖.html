@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="inp"/>
+    <script>
+        var inp=document.getElementById('inp');
+        function debound(delay,fn){
+            var timer;
+            return function(value){
+                clearTimeout(timer)
+                timer=setTimeout(()=>{
+                // console.log(value);
+                fn(value);
+            },delay)
+            }
+        }
+        //在外面取到值通过回调函数
+        var fn=function(data){
+            console.log(data);
+        }
+        var debo=debound(1000,fn)
+        inp.addEventListener('keyup',function(e){
+            debo(e.target.value)
+        })
+    </script>
+</body>
+</html>

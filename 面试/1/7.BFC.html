@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .farther{
+            /* float: left; */
+            /* display: inline-block; */
+            /* display:flex; */
+            /* display: inline-flex; */
+            position: absolute;
+            /* overflow: hidden; */
+        }
+        .son{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+       <!--  BFC的理解:块级格式化上下文,它是指一个独立的块级渲染区域,只有Block-level Box的参与,
+        该区域拥有一套渲染规则来约束块级盒子的布局,且与外部区域无关
+        从一个现象开始说起:一个盒子不设置height,当内部子元素都浮动时,无法撑起自身 这个盒子没有形成BFC
+        如何创建BFC:(1)float的值不是none (2)position的值不是static或者relative
+                    (3)display的值是inline-block,flex,inline-flex
+                    (4)最好的方法 overflow:hidden;
+        BFC的其他作用:(1)可以取消盒子的margin塌陷
+                      (2)阻止元素被浮动的元素覆盖 -->
+
+        <div class="farther">
+            <div class="son"></div>
+            <div class="son"></div>
+            <div class="son"></div>
+        </div>
+   
+</body>
+</html>

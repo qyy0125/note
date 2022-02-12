@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let a=[1,2,2,3,4,4,5];
+        /* let result=[...new Set(a)];
+        console.log(result); */
+
+        // forEach()方法不会返回执行结果，而是undefined。也就是说，forEach()会修改原来的数组。
+        //而map()方法map方法有返回值,不会修改原数组,返回新数组。
+       /*  var result=[];
+        a.forEach((item,key) => {
+            if(result.indexOf(item)==-1){
+                result.push(item)
+            }
+        });
+        console.log(result,a);// [1, 2, 3, 4, 5] , [1, 2, 2, 3, 4, 4, 5] */
+
+        /* var result=a.filter((item,index)=>{
+            return a.indexOf(item)===index
+        })
+        console.log(result); */
+        var result=[]
+        var idx=a.forEach((item,index,arr)=>{
+            return index;
+            // if(result.indexOf(item)==-1){
+            //     result.push(item)
+               
+            // }
+            arr[index]=item+1;
+
+        })
+        console.log(idx,a)//undefined (7) [1, 2, 2, 3, 4, 4, 5]
+
+        
+       
+
+
+    </script>
+</body>
+</html>

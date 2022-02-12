@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现图片和文字在同一行显示</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div.box1{
+            width: 300px;
+            line-height: 200px;
+            border: 1px solid #ccc;
+            /* font-size: 0; */
+
+           
+        }
+        img{
+           
+            width: 100px;
+            height: 100px;
+            vertical-align: middle;
+            /* 必须要给父亲设置行高 */
+            
+        }
+        div.box2{
+            width: 100px;
+            height: 100px;
+            border: 1px solid #f00;
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            word-wrap:break-word;
+
+        }
+        .box2 h3{
+            line-height: 30px;
+            font-weight:600;
+        }
+        .box2 p{
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">
+        <img src="https://alifei04.cfp.cn/creative/vcg/800/new/VCG211363439424.jpg" alt="">
+        <div class="box2">
+            <h3>fffffffff</h3>
+            <p>bbbbbbbbbbbbbbbb</p>
+        </div>
+    </div>
+</body>
+</html>

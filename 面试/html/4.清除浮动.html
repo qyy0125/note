@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 1给父元素设置高 */
+        ul{
+            height: 50px;
+        }
+
+        /* 2父级定义伪类after和zoom */
+        /* ul::after{
+            display:block; 
+            clear:both; 
+            content:""; 
+            visibility:hidden; 
+            height:0;
+        }
+        ul{ zoom: 1 } */
+
+        /* 3在标签尾部添加空块级标签 */
+        /* .space{
+            clear: both;
+        } */
+
+        /* 4简单粗暴，父级设置overflow:hidden，缺点是不能和position配合使用 */
+       /*  ul{
+            overflow: hidden;
+        } */
+      
+        li{width: 150px;height: 50px;float: left;}
+    </style>
+</head>
+<body>
+    <ul>
+        <li>导航1</li>
+        <li>导航2</li>
+        <li>导航3</li>
+        <li>导航4</li>
+        <li>导航5</li>
+    </ul>
+    <!-- <div class="space"></div> -->
+    <div>
+        你好好顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶
+        <span>kkk</span>
+        <h2>ddddddddddddddddddddddddddddddddddddd</h2>
+    </div>
+    <div>77777777777777777777777777777777777777777777777</div>
+    
+</body>
+</html>

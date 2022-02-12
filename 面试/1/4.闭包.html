@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //局部变量无法共享和保留,而全局变量可能造成变量污染,当我们希望有一种机制可以长久保存变量又不会造成全局污染
+        /* 闭包:函数里面返回函数 */
+        function fun(){
+            var a=0;
+             function f2(){
+                a++;
+                console.log(a);
+            }
+            return f2;
+           /*  return function(){
+                a++;
+                console.log(a);
+            } */
+        }
+        var f=fun();//fun()执行结果就是闭包,fun执行过程返回的发f2,f2赋给了一个全局变量f,导致f2和局部变量a一直存在内存中,不会被回收
+        f();//1
+        f();//2
+    </script>
+</body>
+</html>
