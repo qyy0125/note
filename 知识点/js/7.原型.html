@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Foo(){
+            this.name='yy';
+        }
+        Foo.prototype.show=function(){
+            console.log(this.name)
+        }
+        var foo=new Foo();
+        foo.show();
+        
+        Foo.prototype.age=10;
+        console.log(foo.age)//这样只能读取,如果要设置别的值需要 Foo.prototype.age=20;
+        foo.age=100;//这个是设置在实例对象里面的值,只能自己用,会把公共的原型下的公共值给覆盖了
+        console.log(foo)
+    </script>
+</body>
+</html>

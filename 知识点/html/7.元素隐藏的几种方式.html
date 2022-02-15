@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 占据空间，可以响应用户交互，可以有动画 */
+        /* .hide{
+            opacity:0;
+        } */
+
+        /* 占据空间，但是不响应用户交互，可以有动画 */
+        /* .hide{
+            visibility: hidden;
+        } */
+
+        /* 不占据空间，不响应交互，没有动画 */
+        /* .hide{
+            display: none;
+        } */
+
+        /* 不占据空间，响应交互 */
+        .hide{
+           position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+    </style>
+</head>
+<body>
+    <div class="hide">元素隐藏</div>
+</body>
+</html>

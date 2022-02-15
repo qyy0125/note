@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Foo(){
+          /*  this={};
+           var t={};
+           this=t;
+           t.__proto__=Foo.prototype; */
+
+            this.name='yy';
+            this.show=function(){
+                console.log(this.name)
+            }
+            // return this;
+            // return {age:12}
+        }
+        var foo=new Foo();//通过构造函数构造出一个对象出来
+        console.log(foo)//this对象
+        foo.show();
+
+        /* 
+        new内部原理:
+         第0步:在内存中开辟一块空间
+         第2步:创建一个新的空对象
+         第3部:把this指向这个空对象
+         第四部:当构造函数执行完毕后,如果有return的话,把当前return的返回值赋值给foo实例.没有则默认返回return this把构造函数的this对象返回给foo实例
+         */
+    </script>
+</body>
+</html>
